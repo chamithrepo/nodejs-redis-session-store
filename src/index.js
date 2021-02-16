@@ -39,9 +39,8 @@ app.use(session({
 }))
 
 app.get("/", (req, res) => {
-    sess = req.session;
+    const sess = req.session;
     if (sess.username && sess.password) {
-        sess = req.session;
         if (sess.username) {
             res.write(`<h1>Welcome ${sess.username} </h1><br>`)
             res.write(
@@ -55,9 +54,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    sess = req.session;
-    sess.username = req.body.username
-    sess.password = req.body.password
+    const sess = req.session;
+    const { username, password } = req.body
+    sess.username = username
+    sess.password = password
     // add username and password validation logic here if you want.If user is authenticated send the response as success
     res.end("success")
 });
